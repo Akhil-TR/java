@@ -32,6 +32,12 @@ public class Leave implements Serializable{
     @Column(name = "days")
     private String days;
     
+    @Column(name = "from_date")
+    private String fromDate;
+    
+    @Column(name = "to_date")
+    private String toDate;
+    
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "employee_id", nullable = false)
     @JsonIgnore
@@ -42,10 +48,28 @@ public class Leave implements Serializable{
 		super();
 	}
 
-	public Leave(String description, String days) {
+	public Leave(String description, String days, String toDate, String fromDate) {
 		super();
 		this.description = description;
 		this.days = days;
+		this.fromDate = fromDate;
+		this.toDate = toDate;
+	}
+
+	public String getFromDate() {
+		return fromDate;
+	}
+
+	public void setFromDate(String fromDate) {
+		this.fromDate = fromDate;
+	}
+
+	public String getToDate() {
+		return toDate;
+	}
+
+	public void setToDate(String toDate) {
+		this.toDate = toDate;
 	}
 
 	public Long getId() {
@@ -56,11 +80,11 @@ public class Leave implements Serializable{
 		this.id = id;
 	}
 
-	public String getdescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setdescription(String description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 

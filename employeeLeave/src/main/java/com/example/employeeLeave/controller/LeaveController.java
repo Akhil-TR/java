@@ -15,82 +15,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.employeeLeave.exception.ResourceNotFoundException;
-import com.example.employeeLeave.jpa.EmployeeRepository;
-import com.example.employeeLeave.jpa.LeaveRepository;
 import com.example.employeeLeave.model.Leave;
+import com.example.employeeLeave.service.LeaveService;
 
 
 @RestController
 @RequestMapping("/api")
 public class LeaveController {
 	@Autowired
-	private LeaveRepository leaveRepository;
+	private LeaveService leaveService;
 	
-	@Autowired
-	private EmployeeRepository employeeRepository;
 	
 	// Get all leave 
 	@GetMapping("/leave")
-	  public List<Leave> getAllLeave(){
-	    return leaveRepository.findAll();
+	public List<Leave> getAll(){
+		return leaveService.getAllLeave();
 	  }
-	
 	
 	// Get leave By Employee Id
 	@GetMapping("/employees/{employeeId}/leave")
 	public List<Leave> getLeaveByEmployeeId(@PathVariable Long employeeId) throws ResourceNotFoundException {
-	      
-        if(!employeeRepository.existsById(employeeId)) {
-            throw new ResourceNotFoundException("Employee not found!");
-        }
-      
-      return leaveRepository.findByEmployeeId(employeeId);
-	}
-    
-	
-	
+		return leaveService.getLeaveByEmployeeId(employeeId);
+	  }
+   
+	// Post leave
 	@PostMapping("/employees/{employeeId}/leave")
     public Leave addLeave(@PathVariable Long employeeId,
                             @Valid @RequestBody Leave leave) throws ResourceNotFoundException {
-        return employeeRepository.findById(employeeId)
-                .map(employee -> {
-                    leave.setEmployee(employee);
-                    return leaveRepository.save(leave);
-                }).orElseThrow(() -> new ResourceNotFoundException("Employee not found!"));
-    }
+        return leaveService.addLeaveByEmployeId(employeeId, leave);
+	  }
 	
 	// Update leave By leaveId along with employee Id
 	@PutMapping("/employees/{employeeId}/leave/{leaveId}")
     public Leave updateLeave(@PathVariable Long employeeId,
-                    @PathVariable Long leaveId,
-                    @Valid @RequestBody Leave leaveUpdated) throws ResourceNotFoundException {
-      
-      if(!employeeRepository.existsById(employeeId)) {
-        throw new ResourceNotFoundException("Employee not found!");
-      }
-      
-        return leaveRepository.findById(leaveId)
-                .map(leave -> {
-                    leave.setdescription(leaveUpdated.getdescription());
-                    leave.setDays(leaveUpdated.getDays());
-                    return leaveRepository.save(leave);
-                }).orElseThrow(() -> new ResourceNotFoundException("Leave not found!"));
+                    		 @PathVariable Long leaveId,
+                    		 @Valid @RequestBody Leave leaveUpdated) throws ResourceNotFoundException {
+		return leaveService.updateLeave(employeeId, leaveId, leaveUpdated);
+ 
     }
     
 	// Delete leave By leaveId along with employee Id
     @DeleteMapping("/employees/{employeeId}/leave/{leaveId}")
     public String deleteLeave(@PathVariable Long employeeId,
-                     @PathVariable Long leaveId) throws ResourceNotFoundException {
-      
-      if(!employeeRepository.existsById(employeeId)) {
-        throw new ResourceNotFoundException("Employee not found!");
-      }
-      
-        return leaveRepository.findById(leaveId)
-                .map(assignment -> {
-                    leaveRepository.delete(assignment);
-                    return "Deleted Successfully!";
-                }).orElseThrow(() -> new ResourceNotFoundException("Leave not found!"));
+                     		  @PathVariable Long leaveId) throws ResourceNotFoundException {
+    	return leaveService.deleteLeave(employeeId, leaveId);
     }
 	
 }
