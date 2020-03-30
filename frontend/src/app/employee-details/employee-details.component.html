@@ -1,0 +1,38 @@
+
+<div class="row">
+  <hr/>
+  <div class="col">
+    <h2>Employee Details</h2> 
+    <hr>
+    <div *ngIf="employee">
+      <div>
+          <table>
+              <tr>
+                <td style="font-weight:bold">Full Name</td><td>:</td>
+                <td>{{employee.name}}</td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold">Age</td><td>:</td>
+                <td > {{employee.age}}</td>
+              </tr>
+              <tr>
+                <td style="font-weight:bold"> Designation</td><td>:</td>
+                <td>{{employee.designation}} </td>
+                <td>  {{leave.fromDate}} </td>
+              </tr>
+          </table>
+    </div>
+    
+    <br>
+    <div>
+          <li class="list-inline-item">
+            <button (click)="employeeUpdate(employee.id)" class="btn btn-warning">Update Details</button>    
+            </li>
+            <li class="list-inline-item">
+              <button (click) ="toggle()" class="btn btn-info">Leave Details</button>
+            </li>
+    </div>
+</div>
+  </div>
+</div>
+<app-leave-details *ngIf="isViewable"  [id]="id"></app-leave-details>

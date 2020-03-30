@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +28,7 @@ public class LeaveService {
 		return leaveRepository.findAll();
 	}
 	
-	// Get by Id
+	// Get by EmplyeeId
 	@Transactional
 	public List<Leave> getLeaveByEmployeeId(Long employeeId) throws ResourceNotFoundException {
 		if(!employeeRepository.existsById(employeeId)) {
@@ -36,6 +37,14 @@ public class LeaveService {
 		return leaveRepository.findByEmployeeId(employeeId);
 	}
 	
+	// get By LeaveId
+	@Transactional
+	public ResponseEntity<Leave> getLeaveByLeaveId(Long leaveId) throws ResourceNotFoundException{
+		Leave leave  = leaveRepository.findById(leaveId).orElseThrow(
+		 			()-> new ResourceNotFoundException("Leave not found for this ID ::" + leaveId)
+             );
+		return ResponseEntity.ok().body(leave);	
+	}
 	
 	// Post 
 	@Transactional

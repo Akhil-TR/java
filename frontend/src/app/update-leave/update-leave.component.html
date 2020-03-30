@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6 align-self-center">
+     <h3 class="text-center">Update Leave</h3>
+        <div class="card">
+            <div class="card-body ">
+            <div>
+              <form (ngSubmit)="onSubmit()" >
+                   <!-- calls  onSubmit function in createEmployee.ts -->
+                <div class="form-group" style="align-items: center;">
+                  <label for="dateFrom">Date From</label>
+                  <input type="date" class="form-control" id="fromDate" required [(ngModel)]="leave.fromDate" name="fromDate">
+                </div>
+            
+                <div class="form-group">
+                  <label for="date">Date To</label>
+                  <input type="date" class="form-control" id="toDate" required [(ngModel)]="leave.toDate" name="toDate">
+                </div>
+            
+                <div class="form-group">
+                  <label for="designation">Total number of leave days</label>
+                  <input type="text" class="form-control" id="designation" required [(ngModel)]="leave.days" name="days">
+                </div>
+                <div class="form-group">
+                    <label for="designation">description</label>
+                    <textarea class="form-control" id="description" required [(ngModel)]="leave.description" name="description"> </textarea>
+                  </div>
+              
+            
+                <button type="submit" class="btn btn-success">Update</button>
+              </form>
+            </div>
+            
+            <!-- <div [hidden]="!submitted" >
+                <div class="alert alert-success" role="alert">
+                    Leave applied Successfully!
+                  </div>
+                  <div class="row justify-content-center">
+                    <ul class="text-center list-inline py-3">
+                        <li class="list-inline-item">
+                      <button class="btn btn-warning">Add New</button>
+                  </li>
+                  <li class="list-inline-item">
+                    <button class="btn btn-danger">Back to List</button>
+                  </li>
+                </ul>
+                </div> -->
+                
+            </div>
+        </div>
+    </div>
+    <div class="col-3 ">
+    </div>
+</div>
+

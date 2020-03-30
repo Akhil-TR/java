@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,12 @@ public class LeaveController {
 	public List<Leave> getAll(){
 		return leaveService.getAllLeave();
 	  }
+	
+	// Get leave by Leave id
+	@GetMapping("/leave/{leaveId}")
+	public ResponseEntity<Leave> getLeaveById(@PathVariable Long leaveId) throws ResourceNotFoundException{
+		return leaveService.getLeaveByLeaveId(leaveId);
+	}
 	
 	// Get leave By Employee Id
 	@GetMapping("/employees/{employeeId}/leave")

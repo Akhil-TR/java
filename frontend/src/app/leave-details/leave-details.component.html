@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col"> 
+      <hr>
+    <h2>Leave Details</h2>  
+      <hr>
+      <div *ngIf="output" class="alert alert-success" role="alert">
+        Leave Deleted Successfully!
+      </div>
+      <button (click)="createLeave()"  class="btn btn-info">Add Leave</button> 
+      <br>  
+      <br>
+      <div><h2>{{message}}</h2></div>
+      <div [hidden]="flag">
+      <table class="table table-striped" >
+        <thead>
+        <tr>
+          <th>SlNo.</th>
+          <th>Leave From</th>
+          <th>Leave To</th>
+          <th>No.Days</th>
+          <th>Description</th>  
+          <th>Actions</th>
+        </tr>
+        <tr>
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of leaveDetails; let i = index;">
+            <td>{{i+1}}</td>
+            <td>{{leave.fromDate}}</td>
+            <td>{{leave.toDate}}</td>
+            <td>{{leave.days}}</td>
+            <td>{{leave.description}}</td>
+            <td>
+              <li class="list-inline-item">
+                <!-- (click)="#employeeDetails(employee.id)" -->
+                <button (click)="update(leave.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
+               </li>
+               <li class="list-inline-item">
+    
+                <button (click)="deleteLeave(leave.id)" class="btn btn-danger">Delete</button> 
+              </li>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+      </div> 
+    </div>
+  </div>
+         

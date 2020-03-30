@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card bg-dark my-2" >
+        <div class="">
+          <h2 class="card-title text-center text-white py-3">Employee-Leave Management</h2>
+          <ul class="text-center list-inline py-3">
+            <li class="list-inline-item">
+            <a routerLink="/employees" class="btn btn-success">View Employees</a>
+                </li>
+            <li class="list-inline-item">
+              <a routerLink="/add" class="btn btn-success">Add Employee</a>
+                </li>
+                <!-- <li> </li> -->
+                <li class="list-inline-item">
+                  <a routerLink="employees/leave/*" class="btn btn-success">View All Leave</a>
+               </li>
+          </ul>
+        </div>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="text-center">Employee List</h2>
+      <div [hidden]=!output >
+        <div class="alert alert-danger" role="alert">
+          Employee Deleted Successfully!
+          </div>
+          </div>
+    </div>
+    <br>
+    <div class="panel-body">
+      <table class="table table-striped" >
+        <thead>
+        <tr>
+          <th>SlNo.</th>
+          <th>Employee Id</th>
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>Designation</th>
+          <th>Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let employee of employees | async; let i = index;">
+          <td>{{i+1}}</td>
+          <td>{{employee.id}}</td>
+          <td>{{employee.name}}</td>
+          <td>{{employee.age}}</td>
+          <td>{{employee.designation}}</td>
+          <td>
+            <li class="list-inline-item">
+            <button (click)="employeeDetails(employee.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+           </li>
+           <li class="list-inline-item">
+
+            <button (click)="deleteEmployee(employee.id)" class="btn btn-danger">Delete</button> 
+  </li>
+
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>  
+
